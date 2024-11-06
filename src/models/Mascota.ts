@@ -1,4 +1,4 @@
-export class Mascostas {
+export class Mascosta {
     private nombre: string;
     private raza: string;
     public constructor(nombre: string, raza: string){
