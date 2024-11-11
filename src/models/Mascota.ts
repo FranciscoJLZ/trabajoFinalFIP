@@ -1,6 +1,3 @@
-import { GeneradorID } from "./GeneradorID";
-import { Cliente } from "./Cliente";
-
 export class Mascota {
   private ID: string;
   private nombre: string;
