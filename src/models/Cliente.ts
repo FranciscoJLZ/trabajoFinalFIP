@@ -48,18 +48,3 @@ export class Cliente {
 }
 
 
-let cliente1:Cliente= new Cliente("Juan", 2284556633)
-let mascota1:Mascota= new Mascota("firu")
-let mascota2:Mascota= new Mascota ("pelos")
-cliente1.agregarMascota(mascota1)
-cliente1.agregarMascota(mascota2)
-
-console.log(cliente1)
-
-cliente1.bajaMascota(mascota1)
-cliente1.agregarVisita()
-cliente1.agregarVisita()
-cliente1.agregarVisita()
-cliente1.agregarVisita()
-cliente1.agregarVisita()
-console.log(cliente1)
