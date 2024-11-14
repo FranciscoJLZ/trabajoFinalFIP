@@ -118,7 +118,7 @@ export class Menu {
    */
   static async elegirOpcion(
     mensaje: string,
-    opciones: string[]
+    opciones: string[] | { name: string; value: string; disabled?: boolean }[]
   ): Promise<string> {
     const pregunta = await inquirer.prompt({
       name: "respuesta",
