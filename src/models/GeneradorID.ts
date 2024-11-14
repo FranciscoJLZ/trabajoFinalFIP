@@ -73,7 +73,7 @@ export class GeneradorID {
    * Este metodo deberia usarse cada vez que se elimina
    * una instancia de alguna clase que utilice estos ids.
    */
-  public removeID(id: string) {
+  public eliminarID(id: string) {
     // Chequear si id es del mismo tipo
     if (!this.validarFormato(id)) {
       throw new Error("El ID ingresado no es válido.");
