@@ -4,13 +4,11 @@ import { Cliente } from "./Cliente";
 export class Mascota{
     private ID: string;
     private nombre: string;
-    private especie: string[];
-    private nuevaEspecie: string[];
-    public constructor(nombre: string){
+    private especie: "perro" | "gato" | "exotico";
+    public constructor(nombre: string, especie: "perro" | "gato" | "exotico"){
         this.nombre = nombre;
-        this.especie = ["Gato","Perro","Exótica"];
-        this.nuevaEspecie = [];
         this.ID = "";
+        this.especie = especie;
     }
     public getEspecie(){
         return this.especie;
@@ -18,10 +16,11 @@ export class Mascota{
     public getID(){
         return this.ID;
     }
-    public setEspecie(i: number){
-        this.nuevaEspecie.push(this.especie[i]);
-    }
     public asignarID(ClienteID: string){
        return this.ID = ClienteID; 
     }
 }
+
+/*Ejemplo de instancia 
+(Aprobado)
+let paciente0 = new Mascota("Charly","gato"); */
