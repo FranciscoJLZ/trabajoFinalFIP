@@ -104,7 +104,7 @@ export class Menu {
   /**
    * Muestra una lista de opciones y permite al usuario seleccionar una.
    * @param {string} mensaje El mensaje o la pregunta que se mostrará al usuario.
-   * @param {string[]} opciones Un array de opciones que el usuario puede elegir.
+   * @param {string[] | { name: string; value: string; disabled?: boolean }[]} opciones Un array de opciones que el usuario puede elegir.
    * @returns {Promise<string>} La opción seleccionada por el usuario.
    *
    * **Nota:** Este método es asincrónico y debe usarse dentro de una función `async` con `await`.
