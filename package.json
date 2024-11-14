@@ -14,8 +14,12 @@
   "license": "ISC",
   "description": "",
   "devDependencies": {
+    "@types/inquirer": "^9.0.7",
     "@types/node": "^22.9.0",
     "ts-node-dev": "^2.0.0",
     "typescript": "^5.6.3"
+  },
+  "dependencies": {
+    "inquirer": "^12.1.0"
   }
 }
