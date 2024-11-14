@@ -16,8 +16,17 @@ export class Mascota{
     public getID(){
         return this.ID;
     }
+    public getNombre(){
+        return this.nombre;
+    }
     public asignarID(ClienteID: string){
        return this.ID = ClienteID; 
+    }
+    public setEspecie(especie: "perro" | "gato" | "exotico"){
+        return this.especie = especie;
+    }
+    public setNombre(nombre: string){
+        return this.nombre = nombre;
     }
 }
 
