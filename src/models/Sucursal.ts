@@ -44,36 +44,15 @@ export class Sucursal {
         datoCliente.toLowerCase();
         if (datoCliente == "nombre") {
             Cliente.setNombre(valorNuevo);
-        } else if (datoCliente == Cliente.getNumero()) {
+        } else if (datoCliente == "telefono") {
             Cliente.setNumero(valorNuevo);
         }
         else {
             return console.error("el dato ingresado es invalido");
         }
     }
-    public modificarDatosMascota(datoMascota: string, valorNuevo: any) {
-        datoMascota.toLowerCase();
-        if (datoMascota == "nombre") {
-            Mascota.setNombre(valorNuevo);
-        } else if (datoMascota == "especie" || "Especie") {
-            if (valorNuevo === "perro" || "gato" || "exotico") {
-                Mascota.setEspecie(valorNuevo);
-            }
-        } else {
-            return console.error("iterador invalido");
-        }
-    }
     public ingresarIDCliente(ID: Cliente) {
         for (let i = 0; i < this.listaClientes.length; i++) {
-            if (ID === this.listaClientes[i]) {
-                return 
-            } else {
-                return console.error(`La ID ingresada(${ID}): Es inválida`);
-            }
-        }
-    }
-    public ingresarIDPaciente(ID: Cliente) {
-        for (let i = 0; i < this.listaPacientes.length; i++) {
             if (ID === this.listaClientes[i]) {
                 return 
             } else {
