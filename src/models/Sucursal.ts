@@ -5,7 +5,6 @@ import { AnyARecord } from "dns";
 import { stringify } from "querystring";
 
 export class Sucursal {
-    private listaPacientes: Mascota[];
     private listaClientes: Cliente[];
     private nombre: string;
     private numero: number;
@@ -14,7 +13,6 @@ export class Sucursal {
         this.nombre = nombre;
         this.numero = numero;
         this.IDSucursal = GeneradorID.instancia.generarID();
-        this.listaPacientes = [];
         this.listaClientes = [];
     }
     //getters----
@@ -28,12 +26,6 @@ export class Sucursal {
         return this.IDSucursal;
     }
     //methods----
-    public darAlta(altaMascota: Mascota): void {
-        this.listaPacientes.push(altaMascota);
-    }
-    public darBaja(bajaMascota: Mascota): void {
-        const iPaciente = this.listaPacientes.findIndex((Mascota) => Mascota.getNombre() === bajaMascota.getNombre());
-    }
     public agregarCliente(nuevoCliente: Cliente) {
         this.listaClientes.push(nuevoCliente)
     }
@@ -43,9 +35,9 @@ export class Sucursal {
     public modificarDatosCliente(datoCliente: string, valorNuevo: any) {
         datoCliente.toLowerCase();
         if (datoCliente == "nombre") {
-            Cliente.setNombre(valorNuevo);
+            Cliente.setNombre(valorNuevo);//cambiar
         } else if (datoCliente == "telefono") {
-            Cliente.setNumero(valorNuevo);
+            Cliente.setNumero(valorNuevo);//cambiar
         }
         else {
             return console.error("el dato ingresado es invalido");
