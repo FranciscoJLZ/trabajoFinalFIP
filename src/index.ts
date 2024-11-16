@@ -65,16 +65,16 @@ export class MenuVeterinaria {
       opciones
     );
 
-   if(opcion === "sucursal"){
-    this.subMenu("sucursal");
-   }else if(opcion === "proveedor"){
-    this.subMenu("proveedor");
-   }else{
-    console.log("Adios. Muchas gracias!");
-        process.exit(0);
-   }
+    if (opcion === "sucursal") {
+      this.subMenu("sucursal");
+    } else if (opcion === "proveedor") {
+      this.subMenu("proveedor");
+    } else {
+      console.log("Adios. Muchas gracias!");
+      process.exit(0);
+    }
   }
-  
+
   private async subMenu(tipo: "sucursal" | "proveedor") {
     console.clear();
 
@@ -94,12 +94,12 @@ export class MenuVeterinaria {
       "Por favor elige una opcion",
       opciones
     );
-    
-    if(opcion === "alta"){
+
+    if (opcion === "alta") {
       this.subMenuAlta(tipo);
-     }else if(opcion === "ver"){
+    } else if (opcion === "ver") {
       this.subMenuLista(tipo);
-     }else{
+    } else {
       this.subMenu(tipo);
     }
   }
@@ -184,7 +184,7 @@ export class MenuVeterinaria {
       this.menuPrincipal();
     }
   }
-/* seguir laburando menu edicion
+  /* seguir laburando menu edicion
    "" cliente y mascota 
    "" edicion de sucursales y proveedores
    "" alta y baja de mascotas y clientes

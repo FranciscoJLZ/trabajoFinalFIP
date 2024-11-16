@@ -27,12 +27,12 @@ export class Cliente {
     }
   }
 
-  setTelefono(telefono: number){
-    return this.telefono = telefono;
+  setTelefono(telefono: number) {
+    return (this.telefono = telefono);
   }
 
-  setNombre(nombre: string){
-    return this.nombre = nombre;
+  setNombre(nombre: string) {
+    return (this.nombre = nombre);
   }
 
   public agregarMascota(mascota: Mascota): void {
@@ -40,19 +40,21 @@ export class Cliente {
     mascota.asignarID(this.id);
   }
 
-  public modificarMascota(datoMascota: string, valorNuevo: any, mascota: Mascota) {
+  public modificarMascota(
+    datoMascota: string,
+    valorNuevo: any,
+    mascota: Mascota
+  ) {
     datoMascota.toLowerCase();
     if (datoMascota == "nombre") {
-        mascota.setNombre(valorNuevo);
+      mascota.setNombre(valorNuevo);
     } else if (datoMascota == "especie") {
-        mascota.setEspecie(valorNuevo);
+      mascota.setEspecie(valorNuevo);
+    } else {
+      return console.log("el dato ingresado es invalido");
     }
-    else {
-        return console.log("el dato ingresado es invalido");
-    }
-}
+  }
 
-  
   public bajaMascota(nombre: Mascota): void {
     this.mascotas = this.mascotas.filter((mascota) => mascota != nombre);
   }
