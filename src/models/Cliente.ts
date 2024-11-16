@@ -27,21 +27,33 @@ export class Cliente {
     }
   }
 
+  setTelefono(telefono: number){
+    return this.telefono = telefono;
+  }
+
+  setNombre(nombre: string){
+    return this.nombre = nombre;
+  }
+
   public agregarMascota(mascota: Mascota): void {
     this.mascotas.push(mascota);
     mascota.asignarID(this.id);
   }
 
+  public modificarMascota(datoMascota: string, valorNuevo: any, mascota: Mascota) {
+    datoMascota.toLowerCase();
+    if (datoMascota == "nombre") {
+        mascota.setNombre(valorNuevo);
+    } else if (datoMascota == "especie") {
+        mascota.setEspecie(valorNuevo);
+    }
+    else {
+        return console.log("el dato ingresado es invalido");
+    }
+}
+
   
   public bajaMascota(nombre: Mascota): void {
     this.mascotas = this.mascotas.filter((mascota) => mascota != nombre);
-  }
-
-  public modificarCliente(propiedadAModificar: string, valorNuevo: any) {
-    if (propiedadAModificar == "nombre") {
-      this.nombre = valorNuevo;
-    } else {
-      this.telefono = valorNuevo;
-    }
   }
 }

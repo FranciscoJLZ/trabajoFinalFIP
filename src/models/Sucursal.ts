@@ -32,24 +32,16 @@ export class Sucursal {
     public eliminarCliente(bajaClinete: Cliente) {
         const iCliente = this.listaClientes.findIndex((Cliente) => Cliente.getID() === bajaClinete.getID());
     }
-    public modificarDatosCliente(datoCliente: string, valorNuevo: any) {
+
+    public modificarDatos(datoCliente: string, valorNuevo: any, cliente: Cliente) {
         datoCliente.toLowerCase();
         if (datoCliente == "nombre") {
-            Cliente.setNombre(valorNuevo);//cambiar
+            cliente.setNombre(valorNuevo);
         } else if (datoCliente == "telefono") {
-            Cliente.setNumero(valorNuevo);//cambiar
+            cliente.setTelefono(valorNuevo);
         }
         else {
-            return console.error("el dato ingresado es invalido");
-        }
-    }
-    public ingresarIDCliente(ID: Cliente) {
-        for (let i = 0; i < this.listaClientes.length; i++) {
-            if (ID === this.listaClientes[i]) {
-                return 
-            } else {
-                return console.error(`La ID ingresada(${ID}): Es inválida`);
-            }
+            return console.log("el dato ingresado es invalido");
         }
     }
 }

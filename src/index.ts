@@ -44,7 +44,7 @@ import { Proveedor, Veterinaria } from "./models/Veterinaria";
 // Dar de baja proveedor
 // <- Atras
 
-class MenuVeterinaria {
+export class MenuVeterinaria {
   private veterinaria: Veterinaria;
 
   constructor() {
@@ -60,36 +60,28 @@ class MenuVeterinaria {
       { value: "salir", name: "Salir" },
     ];
 
-    // Se utiliza .bind(this) para que se mantenga el contexto de la instancia
-    // entre los metodos.
-    const acciones: Record<string, () => Promise<void>> = {
-      sucursal: this.subMenu.bind(this, "sucursal"),
-      proveedor: this.subMenu.bind(this, "proveedor"),
-      salir: async () => {
-        console.log("Adios. Muchas gracias!");
-        process.exit(0);
-      },
-    };
-
     const opcion = await Menu.elegirOpcion(
       "Por favor elige una opcion",
       opciones
     );
 
-    if (acciones[opcion]) {
-      await acciones[opcion]();
-    } else {
-      console.log("Opcion inválida.");
-    }
+   if(opcion === "sucursal"){
+    this.subMenu("sucursal");
+   }else if(opcion === "proveedor"){
+    this.subMenu("proveedor");
+   }else{
+    console.log("Adios. Muchas gracias!");
+        process.exit(0);
+   }
   }
-
+  
   private async subMenu(tipo: "sucursal" | "proveedor") {
     console.clear();
 
     const opciones = [
       {
         value: "ver",
-        name: `Consultar ${tipo === "sucursal" ? "sucursales" : "proveedores"}`,
+        name: `Consultar ${tipo === "sucursal" ? "sucursales" : "proveedores"}`, //funciona como un if compacto :D
       },
       {
         value: "alta",
@@ -98,21 +90,17 @@ class MenuVeterinaria {
       { value: "salir", name: "Atras" },
     ];
 
-    const acciones: Record<string, () => Promise<void>> = {
-      ver: this.subMenuLista.bind(this, tipo),
-      alta: this.subMenuAlta.bind(this, tipo),
-      salir: this.menuPrincipal.bind(this),
-    };
-
     const opcion = await Menu.elegirOpcion(
       "Por favor elige una opcion",
       opciones
     );
-
-    if (acciones[opcion]) {
-      await acciones[opcion]();
-    } else {
-      console.log("Opcion inválida.");
+    
+    if(opcion === "alta"){
+      this.subMenuAlta(tipo);
+     }else if(opcion === "ver"){
+      this.subMenuLista(tipo);
+     }else{
+      this.subMenu(tipo);
     }
   }
 
@@ -144,11 +132,11 @@ class MenuVeterinaria {
       if (opcion === "salir") {
         this.menuPrincipal();
       } else {
-        const obj = this.veterinaria.buscar(tipo, opcion);
-        if (!obj) {
-          console.log("Opcion invalida.");
+        const entidad = this.veterinaria.buscar(tipo, opcion);
+        if (!entidad) {
+          console.log("entidad no encontrada");
         } else {
-          this.subMenuEdicion(obj);
+          this.subMenuEdicion(entidad);
         }
       }
     }
@@ -158,7 +146,7 @@ class MenuVeterinaria {
     console.log(
       `Crear ${tipo === "sucursal" ? "nueva sucursal" : "nuevo proveedor"}`
     );
-
+    /*Carga nombre y num */
     const nombre = await Menu.pedirTexto("Nombre");
     const numero = await Menu.pedirNumero(
       `${tipo === "sucursal" ? "Numero" : "Telefono"}`
@@ -188,6 +176,7 @@ class MenuVeterinaria {
       "Que quieres hacer a continuacion",
       opciones
     );
+    console.clear();
 
     if (opcion === "alta") {
       this.subMenuAlta(tipo);
@@ -195,7 +184,12 @@ class MenuVeterinaria {
       this.menuPrincipal();
     }
   }
-
+/* seguir laburando menu edicion
+   "" cliente y mascota 
+   "" edicion de sucursales y proveedores
+   "" alta y baja de mascotas y clientes
+   "" se sigue viendo
+*/
   private async subMenuEdicion(obj: Sucursal | Proveedor) {
     console.clear();
     console.log("Menu para editar", obj);
@@ -210,7 +204,7 @@ class MenuVeterinaria {
   }
 }
 
-////////////////////// index.ts
+//---- index.ts
 
 const sistema = new MenuVeterinaria();
 sistema.menuPrincipal();
