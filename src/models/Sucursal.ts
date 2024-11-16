@@ -53,4 +53,14 @@ export class Sucursal {
       return console.log("el dato ingresado es invalido");
     }
   }
+
+  // JOSE: Se agregan setter para modificar la clase sucursal
+  // desde veterinaria
+  public setNombre(nombre: string) {
+    this.nombre = nombre;
+  }
+
+  public setNumero(numero: number) {
+    this.numero = numero;
+  }
 }
