@@ -20,6 +20,14 @@ export class Cliente {
   public getID() {
     return this.id;
   }
+  // JOSE: Agrego getter de nombre, para leerlo desde la clase veterinaria
+  public getNombre() {
+    return this.nombre;
+  }
+  // JOSE: Agrego getter de mascotas, para leerlo desde la clase veterinaria
+  public getMascotas() {
+    return this.mascotas;
+  }
   public agregarVisita(): void {
     this.visitas = this.visitas + 1;
     if (this.visitas >= 5) {
