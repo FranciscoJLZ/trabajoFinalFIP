@@ -25,6 +25,10 @@ export class Sucursal {
   public getID() {
     return this.IDSucursal;
   }
+  // JOSE: Agrego getter de clientes, para leerlos desde la clase veterinaria
+  public getClientes() {
+    return this.listaClientes;
+  }
   //methods----
   public agregarCliente(nuevoCliente: Cliente) {
     this.listaClientes.push(nuevoCliente);
