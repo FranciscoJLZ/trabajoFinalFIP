@@ -1,31 +1,31 @@
 import { GeneradorID } from "./GeneradorID";
 
-export class Provedor {
-    private ID: string;
-    private Nombre: string;
-    private Telefono: number;
-    //-----
-    public constructor(Nombre: string, Telefono: number){
-        this.Nombre= Nombre;
-        this.Telefono = Telefono;
-        this.ID = GeneradorID.instancia.generarID();
-    }
-    //----
-    getID(){
-        return this.ID;
-    }
-    getNombre(){
-        return this.Nombre;
-    }
-    getTelefono(){
-        return this.Telefono;
-    }
-    //----
-    setNombre(Nombre: string){
-        return this.Nombre = Nombre;
-    }
-    setTelefono(Telefono: number){
-        return this.Telefono = Telefono;
-    }
-    //Avisar en caso de requerir algún metodo----
+export class Proveedor {
+  private id: string;
+  private nombre: string;
+  private telefono: number;
+  //-----
+  public constructor(Nombre: string, Telefono: number) {
+    this.nombre = Nombre;
+    this.telefono = Telefono;
+    this.id = GeneradorID.instancia.generarID();
+  }
+  //----
+  getID() {
+    return this.id;
+  }
+  getNombre() {
+    return this.nombre;
+  }
+  getTelefono() {
+    return this.telefono;
+  }
+  //----
+  setNombre(nombre: string) {
+    this.nombre = nombre;
+  }
+  setTelefono(telefono: number) {
+    this.telefono = telefono;
+  }
+  //Avisar en caso de requerir algún metodo----
 }
