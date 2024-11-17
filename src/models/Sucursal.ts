@@ -33,9 +33,18 @@ export class Sucursal {
   public agregarCliente(nuevoCliente: Cliente) {
     this.clientes.push(nuevoCliente);
   }
+
+  // JOSE: Fix: Modifico implentacion del metodo eliminar
+  
+  // public eliminarCliente(bajaCliente: Cliente) {
+  //   const iCliente = this.clientes.findIndex(
+  //     (cliente) => cliente.getID() === bajaCliente.getID()
+  //   );
+  // }
+
   public eliminarCliente(bajaCliente: Cliente) {
-    const iCliente = this.clientes.findIndex(
-      (cliente) => cliente.getID() === bajaCliente.getID()
+    this.clientes = this.clientes.filter(
+      (cliente) => cliente.getID() !== bajaCliente.getID()
     );
   }
 
