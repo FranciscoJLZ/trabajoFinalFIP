@@ -1,4 +1,4 @@
-import { GeneradorID } from "./GeneradorID";
+import { GeneradorID } from "../utils/GeneradorID";
 import { Cliente } from "./Cliente";
 import { Mascota } from "./Mascota";
 import { AnyARecord } from "dns";

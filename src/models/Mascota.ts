@@ -1,4 +1,4 @@
-import { GeneradorID } from "./GeneradorID";
+import { GeneradorID } from "../utils/GeneradorID";
 import { Cliente } from "./Cliente";
 
 export class Mascota {
