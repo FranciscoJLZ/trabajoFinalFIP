@@ -4,7 +4,7 @@
 
 import inquirer from "inquirer";
 import { UnnamedDistinctQuestion } from "inquirer/dist/commonjs/types";
-import { TPreguntas } from "../interface/Sistema";
+import { TPreguntas } from "../types";
 
 /**
  * Clase utilitaria para facilitar el uso del paquete "inquirer.js" para
@@ -133,7 +133,13 @@ export class Menu {
   }
 
   /**
+   * Muestra una lista de preguntas utilizando la biblioteca `inquirer` y devuelve las respuestas del usuario.
    *
+   * @param {TPreguntas} preguntas - Un arreglo de preguntas que se mostrarán al usuario. Cada pregunta debe incluir
+   * un `name`, un `type`, un `message` y, opcionalmente, `choices` para las preguntas de tipo lista.
+   *
+   * @returns {Promise<Record<string, any>>} Una promesa que se resuelve con un objeto que contiene las respuestas del usuario,
+   * donde cada clave es el `name` de la pregunta y el valor es la respuesta proporcionada.
    */
   static async listaPreguntas(preguntas: TPreguntas) {
     const pr = preguntas as unknown as (UnnamedDistinctQuestion<{
