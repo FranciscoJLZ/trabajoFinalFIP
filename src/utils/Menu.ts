@@ -4,7 +4,7 @@
 
 import inquirer from "inquirer";
 import { UnnamedDistinctQuestion } from "inquirer/dist/commonjs/types";
-import { TPreguntas } from "../menu/Sistema";
+import { TPreguntas } from "../interface/Sistema";
 
 /**
  * Clase utilitaria para facilitar el uso del paquete "inquirer.js" para

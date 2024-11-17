@@ -1,4 +1,4 @@
-import { type TEntidad } from "../menu/Sistema";
+import { type TEntidad } from "../interface/Sistema";
 
 import { Sucursal } from "./Sucursal";
 import { Proveedor } from "./Proveedor";
