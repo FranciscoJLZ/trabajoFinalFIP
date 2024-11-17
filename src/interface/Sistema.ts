@@ -51,20 +51,20 @@ export class Sistema {
     // en la primera pantalla luego de ingresar al sistema.
     // Se suma la opción de salir
     const operacionesDisponibles = [
-      { value: "consultar", name: "1. Consultar registros" },
-      { value: "crear", name: "2. Dar de alta regitros" },
-      { value: "salir", name: "3. Salir del sistema" },
+      { value: "consultar", name: "1. 🔍 Consultar registros" },
+      { value: "crear", name: "2. 📄 Dar de alta regitros" },
+      { value: "salir", name: "3. 🚪 Salir del sistema" },
     ];
 
     // Aca se declaran las opciones para que el usuario
     // seleccione sobre que tipo de entidad operar.
     // Se suma la opción de salir
     const tiposDisponibles = [
-      { value: "sucursal", name: "Sucursales" },
-      { value: "proveedor", name: "Proveedores" },
-      { value: "cliente", name: "Clientes" },
-      { value: "mascota", name: "Mascotas" },
-      { value: "salir", name: "<- Atrás" },
+      { value: "sucursal", name: "🏢  Sucursales" },
+      { value: "proveedor", name: "🛠️   Proveedores" },
+      { value: "cliente", name: "👩  Clientes" },
+      { value: "mascota", name: "🐕  Mascotas" },
+      { value: "salir", name: "↩️   Atrás" },
     ];
 
     // Se inicia un bucle infinito para que siempre
@@ -190,8 +190,8 @@ export class Sistema {
       // Agregamos opciones para dar de alta, y para volver atras.
       // Se agregan al final del listado de registros encontrados.
       opciones.push(
-        { value: "alta", name: "-> Crear un registro nuevo" },
-        { value: "salir", name: "<- Atras" }
+        { value: "alta", name: "📄 Crear un registro nuevo" },
+        { value: "salir", name: "↩️  Atras" }
       );
 
       // Se envian las opciones a la consola,
@@ -452,14 +452,14 @@ export class Sistema {
     // se agrega una opcion de registrar visita (se hace de manera manual,
     // ya que es un caso especial, y el unico en la aplicacion).
     if (entidad instanceof Cliente) {
-      opciones.push({ value: "registrar", name: "Registrar visita" });
+      opciones.push({ value: "registrar", name: "➕ Registrar visita" });
     }
 
     // Se agregan a la cola de opciones, la opcion de eliminar
     // el registro y de volver hacia el menu anterior.
     opciones.push(
-      { value: "eliminar", name: "X Eliminar registro" },
-      { value: "salir", name: "<- Atras" }
+      { value: "eliminar", name: "❌ Eliminar registro" },
+      { value: "salir", name: "↩️  Atras" }
     );
 
     // Se limpia la consola, y se imprime el encabezado
@@ -493,18 +493,18 @@ export class Sistema {
       // agregarVisita() el cual aumenta la propiedad visitas, y chequeas si es Vip o no.
       (entidad as Cliente).agregarVisita();
       // Se muestra un mensaje de exito.
-      console.log("Visita registrada exitosamente.");
+      console.log("✅ Visita registrada exitosamente.");
     }
 
     // Si la opcion seleccionada es "eliminar"
     if (opcion === "eliminar") {
       // Se informa al usuario la repercucion de la accion,
       console.log(
-        "La siguiente accion borrara el registro seleccionado y todos los datos relacionados."
+        "⚠️ La siguiente accion borrara el registro seleccionado y todos los datos relacionados."
       );
       // y se solicita confirmacion:
       const confimacion = await Menu.pedirConfirmacion(
-        "Estas seguro que deseas eliminar el/los registro/s?"
+        "⛔ ¿Estas seguro que deseas eliminar el/los registro/s?"
       );
 
       // Si el usuario confirma la eliminacion
@@ -568,7 +568,7 @@ export class Sistema {
 
     // Se le consulta al usuario si quiere continuar editando
     const confimacion = await Menu.pedirConfirmacion(
-      "Desea continuar editando?"
+      "🆗 ¿Desea continuar editando?"
     );
 
     // en caso afirmativo, se vuelve a cargar el menu edicion
