@@ -3,6 +3,8 @@
 // https://refactoring.guru/design-patterns/facade
 
 import inquirer from "inquirer";
+import { UnnamedDistinctQuestion } from "inquirer/dist/commonjs/types";
+import { TPreguntas } from "../menu/Sistema";
 
 /**
  * Clase utilitaria para facilitar el uso del paquete "inquirer.js" para
@@ -128,5 +130,16 @@ export class Menu {
     });
 
     return pregunta.respuesta;
+  }
+
+  /**
+   *
+   */
+  static async listaPreguntas(preguntas: TPreguntas) {
+    const pr = preguntas as unknown as (UnnamedDistinctQuestion<{
+      [x: string]: any;
+    }> & { name: string })[];
+
+    return await inquirer.prompt(pr);
   }
 }
