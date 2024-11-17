@@ -13,7 +13,9 @@ export class Cliente {
     this.id = GeneradorID.instancia.generarID();
     this.nombre = nombre;
     this.telefono = telefono;
-    this.visitas = 0;
+    // JOSE: Inicio visita en 1 porque entiendo que si se da
+    // de alta el cliente en sistema es porque visito la Veterinaria.
+    this.visitas = 1;
     this.esVip = "No";
     this.mascotas = [];
   }
