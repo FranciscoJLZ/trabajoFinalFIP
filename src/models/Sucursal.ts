@@ -5,15 +5,15 @@ import { AnyARecord } from "dns";
 import { stringify } from "querystring";
 
 export class Sucursal {
-  private listaClientes: Cliente[];
+  private id: string;
   private nombre: string;
   private numero: number;
-  private IDSucursal: string;
+  private clientes: Cliente[];
   public constructor(nombre: string, numero: number) {
+    this.id = GeneradorID.instancia.generarID();
     this.nombre = nombre;
     this.numero = numero;
-    this.IDSucursal = GeneradorID.instancia.generarID();
-    this.listaClientes = [];
+    this.clientes = [];
   }
   //getters----
   public getNombre(): string {
@@ -23,19 +23,19 @@ export class Sucursal {
     return this.numero;
   }
   public getID() {
-    return this.IDSucursal;
+    return this.id;
   }
   // JOSE: Agrego getter de clientes, para leerlos desde la clase veterinaria
   public getClientes() {
-    return this.listaClientes;
+    return this.clientes;
   }
   //methods----
   public agregarCliente(nuevoCliente: Cliente) {
-    this.listaClientes.push(nuevoCliente);
+    this.clientes.push(nuevoCliente);
   }
-  public eliminarCliente(bajaClinete: Cliente) {
-    const iCliente = this.listaClientes.findIndex(
-      (Cliente) => Cliente.getID() === bajaClinete.getID()
+  public eliminarCliente(bajaCliente: Cliente) {
+    const iCliente = this.clientes.findIndex(
+      (cliente) => cliente.getID() === bajaCliente.getID()
     );
   }
 

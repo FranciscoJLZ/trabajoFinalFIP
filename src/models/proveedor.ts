@@ -6,9 +6,9 @@ export class Proveedor {
   private telefono: number;
   //-----
   public constructor(Nombre: string, Telefono: number) {
+    this.id = GeneradorID.instancia.generarID();
     this.nombre = Nombre;
     this.telefono = Telefono;
-    this.id = GeneradorID.instancia.generarID();
   }
   //----
   getID() {
