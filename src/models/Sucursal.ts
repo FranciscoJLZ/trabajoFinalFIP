@@ -1,8 +1,5 @@
 import { GeneradorID } from "../utils/GeneradorID";
 import { Cliente } from "./Cliente";
-import { Mascota } from "./Mascota";
-import { AnyARecord } from "dns";
-import { stringify } from "querystring";
 
 export class Sucursal {
   private id: string;
