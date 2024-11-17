@@ -1,4 +1,4 @@
-import { type TEntidad } from "../interface/Sistema";
+import { type TEntidad } from "../types";
 
 import { Sucursal } from "./Sucursal";
 import { Proveedor } from "./Proveedor";
@@ -19,6 +19,12 @@ export class Veterinaria {
     mascota: Mascota,
   };
 
+  /**
+   * Argumentos requeridos para la creación de cada tipo de entidad.
+   * @type {Record<string, { nombre: string; tipo: "texto" | "numero" | "lista"; opciones?: { value: string; name: string }[] }[]>}
+   * @public
+   * @static
+   */
   public static readonly argumentos: Record<
     string,
     {
@@ -56,6 +62,12 @@ export class Veterinaria {
     ],
   };
 
+  /**
+   * Diccionario de métodos setter para actualizar propiedades de cada tipo de entidad.
+   * @type {Record<string, Record<string, (entidad: any, valor: any) => void>>}
+   * @private
+   * @static
+   */
   private static setters: Record<
     string,
     Record<string, (entidad: any, valor: any) => void>
@@ -83,62 +95,50 @@ export class Veterinaria {
     this.proveedores = [];
   }
 
+  /**
+   * Devuelve una lista de entidades de un tipo específico.
+   * @param {TEntidad} tipo - El tipo de entidad a listar (sucursal, proveedor, cliente, mascota).
+   * @returns {Array<Sucursal | Proveedor | Cliente | Mascota>} - Una lista de entidades.
+   * @throws {Error} - Lanza un error si no se encuentran registros del tipo solicitado.
+   */
   public ver(tipo: TEntidad) {
-    let resultado: { value: string; name: string }[] = [];
+    let resultado: Sucursal[] | Proveedor[] | Cliente[] | Mascota[] = [];
 
     if (tipo === "sucursal") {
-      resultado = this.sucursales.map((sucursal, index) => {
-        return {
-          value: sucursal.getID(),
-          name: `${index + 1}. ${sucursal.getNombre()}`,
-        };
-      });
+      resultado = this.sucursales;
     }
 
     if (tipo === "proveedor") {
-      resultado = this.proveedores.map((proveedor, index) => {
-        return {
-          value: proveedor.getID(),
-          name: `${index + 1}. ${proveedor.getNombre()}`,
-        };
-      });
+      resultado = this.proveedores;
     }
 
-    // Al listar clientes por nombre se puede repetir, code smells ja
     if (tipo === "cliente") {
-      resultado = this.sucursales.flatMap((sucursal, sucIndex) => {
-        return sucursal.getClientes().map((cliente, cliIndex) => {
-          return {
-            value: cliente.getID(),
-            name: `${sucIndex + cliIndex + 1}. ${cliente.getNombre()}`,
-          };
-        });
+      resultado = this.sucursales.flatMap((sucursal) => {
+        return sucursal.getClientes();
       });
     }
 
-    // Al listar mascotas con nombre se pueden repetir, code smells ja
     if (tipo === "mascota") {
-      resultado = this.sucursales.flatMap((sucursal, sucIndex) => {
-        return sucursal.getClientes().flatMap((cliente, cliIndex) => {
-          return cliente.getMascotas().map((mascota, masIndex) => {
-            return {
-              value: mascota.getID(),
-              name: `${
-                sucIndex + cliIndex + masIndex + 1
-              }. ${mascota.getNombre()}`,
-            };
-          });
+      resultado = this.sucursales.flatMap((sucursal) => {
+        return sucursal.getClientes().flatMap((cliente) => {
+          return cliente.getMascotas();
         });
       });
     }
 
     if (resultado.length === 0) {
       throw new Error(`No se han encontrado registros de tipo ${tipo}`);
-    } else {
-      return resultado;
-    }
+    } 
+
+    return resultado;
   }
 
+  /**
+   * Busca una entidad específica por su ID.
+   * @param {TEntidad} tipo - El tipo de entidad a buscar.
+   * @param {string} id - El ID de la entidad a buscar.
+   * @returns {Sucursal | Proveedor | Cliente | Mascota | null} - La entidad encontrada o `null` si no se encuentra.
+   */
   public buscar(tipo: TEntidad, id: string) {
     let resultado: Sucursal | Proveedor | Cliente | Mascota | null = null;
     if (tipo === "sucursal") {
@@ -161,9 +161,18 @@ export class Veterinaria {
           .find((m) => m.getID() === id) ?? null;
     }
 
+    if (!resultado) {
+      throw new Error(`No se encontro ningún registro con id: ${id}`);
+    }
+    
     return resultado;
   }
 
+  /**
+   * Guarda una entidad de tipo sucursal o proveedor.
+   * @param {TEntidad} tipo - El tipo de entidad a guardar (sucursal o proveedor).
+   * @param {Sucursal | Proveedor} entidad - La entidad a guardar.
+   */
   public guardar(tipo: TEntidad, entidad: Sucursal | Proveedor) {
     if (tipo === "sucursal" && entidad instanceof Sucursal) {
       this.sucursales.push(entidad);
@@ -176,6 +185,12 @@ export class Veterinaria {
     }
   }
 
+  /**
+   * Crea una nueva instancia de entidad a partir de los datos proporcionados.
+   * @param {TEntidad} tipo - El tipo de entidad a crear.
+   * @param {Record<string, any>} datos - Los datos para inicializar la entidad.
+   * @returns {Sucursal | Proveedor | Cliente | Mascota} - La nueva entidad creada.
+   */
   public crear(tipo: TEntidad, datos: Record<string, any>) {
     const Constructor = Veterinaria.constructores[tipo];
     // Aca se deberia agregar alguna validacion por si
@@ -187,6 +202,11 @@ export class Veterinaria {
     return new Constructor(...argumentos);
   }
 
+  /**
+   * Edita una propiedad de una entidad existente.
+   * @param {Sucursal | Proveedor | Cliente | Mascota} entidad - La entidad a editar.
+   * @param {{ propiedad: string; valorNuevo: any }} dato - El nombre de la propiedad a editar y su nuevo valor.
+   */
   public editar(
     entidad: Sucursal | Proveedor | Cliente | Mascota,
     dato: { propiedad: string; valorNuevo: any }
@@ -212,6 +232,11 @@ export class Veterinaria {
     metodoSetter(entidad, dato.valorNuevo);
   }
 
+  /**
+   * Elimina una entidad por su ID.
+   * @param {TEntidad} tipo - El tipo de entidad a eliminar.
+   * @param {string} id - El ID de la entidad a eliminar.
+   */
   public eliminar(tipo: TEntidad, id: string) {
     if (tipo === "sucursal") {
       this.sucursales = this.sucursales.filter(
