@@ -592,6 +592,13 @@ export class Sistema {
     console.log(`Ficha de ${tipo.toUpperCase()}`);
     console.log("---------------------------------------------------");
 
+    // Creamos una matriz de clave-valor con el metodo entries
+    // del prototipo Object de JavaScript. Es decir que por cada clase
+    // que pasemos vamos a obtener un resultado con el siguiente formato:
+    // [ ["propiedad1", valor1], ["propiedad2", valor2 ], ["propiedad3", valor3] ].
+    // Luego iteramos esa matriz con el bucle for..of usando una variable de tipo
+    // array donde en la primera posicion se guarda el valor de la propiedad, y en 
+    // la segunda posicion el valor -> const [propiedad, valor]
     for (const [propiedad, valor] of Object.entries(entidad)) {
       // Formateo de nombre de propiedad, pasando primer letra a mayuscula
       const propMayuscula =
@@ -606,7 +613,7 @@ export class Sistema {
           // tengan la misma distancia.
           console.log(`${propMayuscula.padEnd(15, " ")}: Sin registros`);
         } else {
-          // Imprimo titulo de la lista
+          // Imprime titulo de la lista
           console.log(`${propMayuscula.padEnd(15, " ")}: `);
           valor.forEach((item) => {
             // Agrego 15 espacios en blanco para simular sangria izquierda.
@@ -614,6 +621,7 @@ export class Sistema {
           });
         }
       } else {
+        // Si no es array, se imprime en una sola linea.
         console.log(`${propMayuscula.padEnd(15, " ")}: ${valor}`);
       }
     }
