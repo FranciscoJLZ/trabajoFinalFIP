@@ -6,11 +6,18 @@ export class Mascota {
   private id: string;
   private nombre: string;
   private especie: "perro" | "gato" | "exotico";
+  private idCliente: string;
   public constructor(nombre: string, especie: "perro" | "gato" | "exotico") {
     this.id = GeneradorID.instancia.generarID();
     this.nombre = nombre;
     this.especie = especie;
+    this.idCliente = "";
   }
+
+  public setCliente(idCliente: string) {
+    this.idCliente = idCliente
+  }
+  
   public getEspecie() {
     return this.especie;
   }
