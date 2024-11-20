@@ -47,6 +47,7 @@ export class Cliente {
 
   public agregarMascota(mascota: Mascota): void {
     this.mascotas.push(mascota);
+    mascota.setCliente(this.id);
   }
 
   public modificarMascota(
