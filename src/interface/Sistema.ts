@@ -1,11 +1,11 @@
 import { TEntidad, TPreguntas } from "../types";
-
 import { Menu } from "../utils/Menu";
 import { Veterinaria } from "../models/Veterinaria";
 import { Sucursal } from "../models/Sucursal";
 import { Cliente } from "../models/Cliente";
 import { Mascota } from "../models/Mascota";
 import { Proveedor } from "../models/Proveedor";
+
 
 /**
  * Clase que representa el sistema de gestión de la veterinaria.
