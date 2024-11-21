@@ -6,7 +6,6 @@ import { Cliente } from "../models/Cliente";
 import { Mascota } from "../models/Mascota";
 import { Proveedor } from "../models/Proveedor";
 
-
 /**
  * Clase que representa el sistema de gestión de la veterinaria.
  * Permite gestionar las sucursales, proveedores, clientes y mascotas,
@@ -311,15 +310,58 @@ export class Sistema {
     // contiene las preguntas necesarias a realizar.
     const preguntas = {
       cliente: [
-        { name: "nombre", type: "input", message: "Ingresa nombre: " },
+        {
+          name: "nombre",
+          type: "input",
+          message: "Ingresa nombre: ",
+          validate: (entrada: string | number | null) => {
+            if (typeof entrada === "string") {
+              if (entrada.length > 0) {
+                return true;
+              } else {
+                return "El nombre del cliente no puede estar vacio.";
+              }
+            } else {
+              return "Debes ingresar un nombre válido.";
+            }
+          },
+        },
         {
           name: "telefono",
           type: "number",
           message: "Ingresa nro de telefono: ",
+          validate: (entrada: string | number | null) => {
+            if (typeof entrada === "number") {
+              const largo = entrada.toString().length;
+
+              if (largo >= 1 && largo <= 10) {
+                return true;
+              } else {
+                return "El número debe tener entre 1 y 10 dígitos.";
+              }
+            } else {
+              return "Debes ingresar un número válido.";
+            }
+          },
         },
       ],
       mascota: [
-        { name: "nombre", type: "input", message: "Ingresa nombre: " },
+        {
+          name: "nombre",
+          type: "input",
+          message: "Ingresa nombre: ",
+          validate: (entrada: string | number | null) => {
+            if (typeof entrada === "string") {
+              if (entrada.length > 0) {
+                return true;
+              } else {
+                return "El nombre de la mascota no puede estar vacio.";
+              }
+            } else {
+              return "Debes ingresar un nombre válido.";
+            }
+          },
+        },
         {
           name: "especie",
           type: "list",
@@ -332,19 +374,75 @@ export class Sistema {
         },
       ],
       sucursal: [
-        { name: "nombre", type: "input", message: "Ingresa nombre: " },
+        {
+          name: "nombre",
+          type: "input",
+          message: "Ingresa nombre: ",
+          validate: (entrada: string | number | null) => {
+            if (typeof entrada === "string") {
+              if (entrada.length > 0) {
+                return true;
+              } else {
+                return "El nombre de la sucursal no puede estar vacio.";
+              }
+            } else {
+              return "Debes ingresar un nombre válido.";
+            }
+          },
+        },
         {
           name: "numero",
           type: "number",
           message: "Ingresa numero: ",
+          validate: (entrada: string | number | null) => {
+            if (typeof entrada === "number") {
+              const largo = entrada.toString().length;
+
+              if (largo >= 1 && largo <= 10) {
+                return true;
+              } else {
+                return "El número debe tener entre 1 y 10 dígitos.";
+              }
+            } else {
+              return "Debes ingresar un número válido.";
+            }
+          },
         },
       ],
       proveedor: [
-        { name: "nombre", type: "input", message: "Ingresa nombre: " },
+        {
+          name: "nombre",
+          type: "input",
+          message: "Ingresa nombre: ",
+          validate: (entrada: string | number | null) => {
+            if (typeof entrada === "string") {
+              if (entrada.length > 0) {
+                return true;
+              } else {
+                return "El nombre del proveedor no puede estar vacio.";
+              }
+            } else {
+              return "Debes ingresar un nombre válido.";
+            }
+          },
+        },
         {
           name: "telefono",
           type: "number",
           message: "Ingresa nro de telefono: ",
+          validate: (entrada: string | number | null) => {
+            if (typeof entrada === "number") {
+              const largo = entrada.toString().length;
+
+              if (largo >= 1 && largo <= 10) {
+                return true;
+              } else {
+                return "El número debe tener entre 1 y 10 dígitos.";
+              }
+            } else {
+              return "Debes ingresar un número válido.";
+            }
+          },
         },
       ],
     };
@@ -536,14 +634,18 @@ export class Sistema {
         // se pide al usuario que ingrese el nuevo valor,
         // utilizando el metodo para tomar valores texto en la consola.
         nuevoValor = await Menu.pedirTexto(
-          `Ingresa el nuevo valor para ${argumentoAEditar.nombre}`
+          `Ingresa el nuevo valor para ${argumentoAEditar.nombre}`,
+          argumentoAEditar.validar! as (entrada: string) => boolean | string
         );
       } else if (argumentoAEditar.tipo === "numero") {
         // si el argumento es de tipo number,
         // se pide al usuario que ingrese el nuevo valor,
         // utilizando el metodo para tomar valores numericos en la consola.
         nuevoValor = await Menu.pedirNumero(
-          `Ingresa el nuevo valor para ${argumentoAEditar.nombre}`
+          `Ingresa el nuevo valor para ${argumentoAEditar.nombre}`,
+          argumentoAEditar.validar! as (
+            valor: number | undefined
+          ) => string | boolean | Promise<string | boolean>
         );
       } else {
         // si el argumento es de tipo lista,
