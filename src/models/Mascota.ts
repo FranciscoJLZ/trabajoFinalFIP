@@ -3,12 +3,12 @@ import { Cliente } from "./Cliente";
 
 export class Mascota {
   // Al manejar todo desde 1 solo punto, todas las entidades tienen q tener un id unico
-  private id: string;
+  private idPropio: string;
   private nombre: string;
   private especie: "perro" | "gato" | "exotico";
   private idCliente: string;
   public constructor(nombre: string, especie: "perro" | "gato" | "exotico") {
-    this.id = GeneradorID.instancia.generarID();
+    this.idPropio = GeneradorID.instancia.generarID();
     this.nombre = nombre;
     this.especie = especie;
     this.idCliente = "";
@@ -17,12 +17,16 @@ export class Mascota {
   public setCliente(idCliente: string) {
     this.idCliente = idCliente
   }
+
+  public getCliente(){
+    return this.idCliente
+  }
   
   public getEspecie() {
     return this.especie;
   }
   public getID() {
-    return this.id;
+    return this.idPropio;
   }
   public getNombre() {
     return this.nombre;

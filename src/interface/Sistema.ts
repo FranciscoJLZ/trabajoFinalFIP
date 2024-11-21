@@ -592,14 +592,25 @@ export class Sistema {
     console.log(`Ficha de ${tipo.toUpperCase()}`);
     console.log("---------------------------------------------------");
 
+    let objetoAuxiliar;
+
+    if (entidad instanceof Mascota) {
+      objetoAuxiliar = {
+        nombre: entidad.getNombre(),
+        especie: entidad.getEspecie(),
+        idCliente: entidad.getCliente(),
+      };
+    } else {
+      objetoAuxiliar = entidad;
+    }
     // Creamos una matriz de clave-valor con el metodo entries
     // del prototipo Object de JavaScript. Es decir que por cada clase
     // que pasemos vamos a obtener un resultado con el siguiente formato:
     // [ ["propiedad1", valor1], ["propiedad2", valor2 ], ["propiedad3", valor3] ].
     // Luego iteramos esa matriz con el bucle for..of usando una variable de tipo
-    // array donde en la primera posicion se guarda el valor de la propiedad, y en 
+    // array donde en la primera posicion se guarda el valor de la propiedad, y en
     // la segunda posicion el valor -> const [propiedad, valor]
-    for (const [propiedad, valor] of Object.entries(entidad)) {
+    for (const [propiedad, valor] of Object.entries(objetoAuxiliar)) {
       // Formateo de nombre de propiedad, pasando primer letra a mayuscula
       const propMayuscula =
         propiedad.charAt(0).toUpperCase() + propiedad.slice(1);
