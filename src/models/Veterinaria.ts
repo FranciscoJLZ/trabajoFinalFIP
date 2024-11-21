@@ -30,26 +30,135 @@ export class Veterinaria {
     {
       nombre: string;
       tipo: "texto" | "numero" | "lista";
-      opciones?: { value: string; name: string }[];
+      opciones?: {
+        value: string;
+        name: string;
+      }[];
+      validar?:
+        | ((entrada: string) => boolean | string)
+        | ((
+            valor: number | undefined
+          ) => string | boolean | Promise<string | boolean>);
     }[]
   > = {
     sucursal: [
       {
         nombre: "nombre",
         tipo: "texto",
+        validar: (entrada: string) => {
+          if (typeof entrada === "string") {
+            if (entrada.length > 0) {
+              return true;
+            } else {
+              return "El nombre de la sucursal no puede estar vacio.";
+            }
+          } else {
+            return "Debes ingresar un nombre válido.";
+          }
+        },
       },
-      { nombre: "numero", tipo: "numero" },
+      {
+        nombre: "numero",
+        tipo: "numero",
+        validar: (entrada: number | undefined) => {
+          if (typeof entrada === "number") {
+            const largo = entrada.toString().length;
+
+            if (largo >= 1 && largo <= 10) {
+              return true;
+            } else {
+              return "El número debe tener entre 1 y 10 dígitos.";
+            }
+          } else {
+            return "Debes ingresar un número válido.";
+          }
+        },
+      },
     ],
     proveedor: [
-      { nombre: "nombre", tipo: "texto" },
-      { nombre: "telefono", tipo: "numero" },
+      {
+        nombre: "nombre",
+        tipo: "texto",
+        validar: (entrada: string) => {
+          if (typeof entrada === "string") {
+            if (entrada.length > 0) {
+              return true;
+            } else {
+              return "El nombre del proveedor no puede estar vacio.";
+            }
+          } else {
+            return "Debes ingresar un nombre válido.";
+          }
+        },
+      },
+      {
+        nombre: "telefono",
+        tipo: "numero",
+        validar: (entrada: number | undefined) => {
+          if (typeof entrada === "number") {
+            const largo = entrada.toString().length;
+
+            if (largo >= 1 && largo <= 10) {
+              return true;
+            } else {
+              return "El número debe tener entre 1 y 10 dígitos.";
+            }
+          } else {
+            return "Debes ingresar un número válido.";
+          }
+        },
+      },
     ],
     cliente: [
-      { nombre: "nombre", tipo: "texto" },
-      { nombre: "telefono", tipo: "numero" },
+      {
+        nombre: "nombre",
+        tipo: "texto",
+        validar: (entrada: string) => {
+          if (typeof entrada === "string") {
+            if (entrada.length > 0) {
+              return true;
+            } else {
+              return "El nombre del cliente no puede estar vacio.";
+            }
+          } else {
+            return "Debes ingresar un nombre válido.";
+          }
+        },
+      },
+      {
+        nombre: "telefono",
+        tipo: "numero",
+        validar: (entrada: number | undefined) => {
+          if (typeof entrada === "number") {
+            const largo = entrada.toString().length;
+
+            if (largo >= 1 && largo <= 10) {
+              return true;
+            } else {
+              return "El número debe tener entre 1 y 10 dígitos.";
+            }
+          } else {
+            return "Debes ingresar un número válido.";
+          }
+        },
+      },
     ],
     mascota: [
-      { nombre: "nombre", tipo: "texto" },
+      {
+        nombre: "nombre",
+        tipo: "texto",
+        validar: (entrada: string) => {
+          if (typeof entrada === "string") {
+            if (entrada.length > 0) {
+              return true;
+            } else {
+              return "El nombre de la mascota no puede estar vacio.";
+            }
+          } else {
+            return "Debes ingresar un nombre válido.";
+          }
+        },
+      },
       {
         nombre: "especie",
         tipo: "lista",
@@ -128,7 +237,7 @@ export class Veterinaria {
 
     if (resultado.length === 0) {
       throw new Error(`No se han encontrado registros de tipo ${tipo}`);
-    } 
+    }
 
     return resultado;
   }
@@ -164,7 +273,7 @@ export class Veterinaria {
     if (!resultado) {
       throw new Error(`No se encontro ningún registro con id: ${id}`);
     }
-    
+
     return resultado;
   }
 
