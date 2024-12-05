@@ -4,6 +4,7 @@ import { Sucursal } from "./Sucursal";
 import { Proveedor } from "./Proveedor";
 import { Cliente } from "./Cliente";
 import { Mascota } from "./Mascota";
+import { Archivo } from "../utils/Archivo";
 
 export class Veterinaria {
   private sucursales: Sucursal[];
@@ -308,7 +309,11 @@ export class Veterinaria {
       (arg) => datos[arg.nombre]
     );
 
-    return new Constructor(...argumentos);
+    const entidad = new Constructor(...argumentos);
+
+    Archivo.guardar(tipo, entidad);
+    
+    return entidad;
   }
 
   /**
