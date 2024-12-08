@@ -7,6 +7,8 @@ export class Cliente {
   protected telefono: number;
   protected visitas: number;
   protected esVip: string;
+  // JOSE PROPIEDAD AGREGADA 08.12
+  protected idSucursal: string;
   protected mascotas: Mascota[];
 
   public constructor(nombre: string, telefono: number) {
@@ -17,6 +19,7 @@ export class Cliente {
     // de alta el cliente en sistema es porque visito la Veterinaria.
     this.visitas = 1;
     this.esVip = "No";
+    this.idSucursal = "";
     this.mascotas = [];
   }
   public getID() {
@@ -35,6 +38,11 @@ export class Cliente {
     if (this.visitas >= 5) {
       this.esVip = "Si";
     }
+  }
+
+  // JOSE METODO AGREGADO 08.12
+  setSucursal(idSucursal: string) {
+    this.idSucursal = idSucursal;
   }
 
   setTelefono(telefono: number) {
