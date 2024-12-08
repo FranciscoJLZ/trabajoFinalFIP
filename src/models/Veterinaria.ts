@@ -201,8 +201,21 @@ export class Veterinaria {
   };
 
   constructor() {
-    this.sucursales = [];
-    this.proveedores = [];
+    this.sucursales = this.cargar("sucursal");
+    this.proveedores = this.cargar("proveedor");
+  }
+
+  // JOSE: METODO PARA LEER VARIABLES
+  private cargar(tipo: "sucursal" | "proveedor") {
+    try {
+      const resultado = Archivo.leer(tipo);
+      if (!resultado) {
+        throw new Error("Sin resultados");
+      }
+      return resultado;
+    } catch (error) {
+      return [];
+    }
   }
 
   /**
@@ -312,7 +325,7 @@ export class Veterinaria {
     const entidad = new Constructor(...argumentos);
 
     Archivo.guardar(tipo, entidad);
-    
+
     return entidad;
   }
 
