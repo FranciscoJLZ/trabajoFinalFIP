@@ -6,8 +6,8 @@ export class Sucursal {
   private nombre: string;
   private numero: number;
   private clientes: Cliente[];
-  public constructor(nombre: string, numero: number) {
-    this.id = GeneradorID.instancia.generarID();
+  public constructor(nombre: string, numero: number, id?: string) {
+    this.id = id ? id : GeneradorID.instancia.generarID();
     this.nombre = nombre;
     this.numero = numero;
     this.clientes = [];
@@ -32,7 +32,7 @@ export class Sucursal {
   }
 
   // JOSE: Fix: Modifico implentacion del metodo eliminar
-  
+
   // public eliminarCliente(bajaCliente: Cliente) {
   //   const iCliente = this.clientes.findIndex(
   //     (cliente) => cliente.getID() === bajaCliente.getID()

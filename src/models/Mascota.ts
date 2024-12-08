@@ -7,21 +7,26 @@ export class Mascota {
   private nombre: string;
   private especie: "perro" | "gato" | "exotico";
   private idCliente: string;
-  public constructor(nombre: string, especie: "perro" | "gato" | "exotico") {
-    this.idPropio = GeneradorID.instancia.generarID();
+
+  public constructor(
+    nombre: string,
+    especie: "perro" | "gato" | "exotico",
+    id?: string
+  ) {
+    this.idPropio = id ? id : GeneradorID.instancia.generarID();
     this.nombre = nombre;
     this.especie = especie;
     this.idCliente = "";
   }
 
   public setCliente(idCliente: string) {
-    this.idCliente = idCliente
+    this.idCliente = idCliente;
   }
 
-  public getCliente(){
-    return this.idCliente
+  public getCliente() {
+    return this.idCliente;
   }
-  
+
   public getEspecie() {
     return this.especie;
   }

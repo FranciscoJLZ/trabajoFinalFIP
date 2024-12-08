@@ -6,19 +6,25 @@ export class Cliente {
   protected nombre: string;
   protected telefono: number;
   protected visitas: number;
-  protected esVip: string;
+  protected vip: string;
   // JOSE PROPIEDAD AGREGADA 08.12
   protected idSucursal: string;
   protected mascotas: Mascota[];
 
-  public constructor(nombre: string, telefono: number) {
-    this.id = GeneradorID.instancia.generarID();
+  public constructor(
+    nombre: string,
+    telefono: number,
+    id?: string,
+    visitas?: number,
+    vip?: string
+  ) {
+    this.id = id ? id : GeneradorID.instancia.generarID();
     this.nombre = nombre;
     this.telefono = telefono;
     // JOSE: Inicio visita en 1 porque entiendo que si se da
     // de alta el cliente en sistema es porque visito la Veterinaria.
-    this.visitas = 1;
-    this.esVip = "No";
+    this.visitas = visitas ? visitas : 1;
+    this.vip = vip ? vip : "No";
     this.idSucursal = "";
     this.mascotas = [];
   }
@@ -36,7 +42,7 @@ export class Cliente {
   public agregarVisita(): void {
     this.visitas = this.visitas + 1;
     if (this.visitas >= 5) {
-      this.esVip = "Si";
+      this.vip = "Si";
     }
   }
 
